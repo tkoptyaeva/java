@@ -1,2 +1,5 @@
-package ts.smirnova.FinAssist.domain;public class Role {
+package ts.smirnova.FinAssist.domain;
+
+public enum Role {
+    USER,ADMIN;
 }
