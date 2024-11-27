@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -7,16 +8,18 @@
     <title>Регистрация</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 <h1>Регистрация</h1>
 
-<h3 th:if="${message}">message</h3>
+<h3 th:if="${message}" th:text="${message}">message</h3>
 
-<form th:action="@{/reg}" method="POST">
+<form action="/reg" method="POST">
     <input type="text" name="username" placeholder="Логин">
     <input type="text" name="email" placeholder="Почта">
     <input type="password" name="password" placeholder="Пароль">
+    <input type="hidden" name="_csrf" value=${_csrf.token}>
     <input type="submit" value="Зарегистрироваться">
 </form>
 

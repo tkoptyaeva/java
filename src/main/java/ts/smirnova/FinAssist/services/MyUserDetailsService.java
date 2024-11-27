@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ts.smirnova.FinAssist.config.MyUserDetails;
 import ts.smirnova.FinAssist.repos.UserRepo;
-import ts.smirnova.FinAssist.domain.User;
+import ts.smirnova.FinAssist.domain.MyUser;
 
 import java.util.Optional;
 
@@ -18,7 +18,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepo.findByUsername(username);
+        Optional<MyUser> user = userRepo.findByUsername(username);
         return user.map(MyUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " не найден"));
     }

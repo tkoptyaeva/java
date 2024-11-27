@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -13,10 +14,12 @@
 
 <div th:if="${param.error}">Не верный логин или пароль</div>
 <div th:if="${param.logout}">Нужно авторизоваться</div>
+<div th:if="${param.new}">ВЫ успешно зарегистрировались. Войдите под своим пользователем</div>
 
 <form th:action="@{/login}" method="POST">
     <input type="text" name="username" placeholder="Логин">
     <input type="password" name="password" placeholder="Пароль">
+    <input type="hidden" name="_csrf" value=${_csrf.token}>
     <input type="submit" value="Войти">
 </form>
 

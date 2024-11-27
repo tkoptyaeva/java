@@ -1,14 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Финансовый помощник</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<h1>Приветствую в финансовом помощнике</h1>
+<!--<body>-->
 
-<a href="/login" class="main-link">Войти</a>
-<a href="/reg" class="main-link">Зарегистрироваться</a>
+<body sec:authorize="isAnonymous()">
+
+    <h1>Приветствую в финансовом помощнике</h1>
+    <h3>Для работы авторизуйтесь под своим пользователем или зарегистрируйтесь</h3>
+
+    <a href="/login" class="main-link">Авторизоваться</a>
+    <a href="/reg" class="main-link">Зарегистрироваться</a>
 </body>
+
+
+<body sec:authorize="isAuthenticated()">
+<!--Для авторизованных-->
+<header>
+    <h1>Твои финансы</h1>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</header>
+
+<div class="new-fin-form">
+    <h1>Введите новые расходы</h1>
+    <form action="/" method="POST">
+        <input type="text" name="fin_title" placeholder="Расходы">
+        <input type="text" name="fin_value" placeholder="Сумма">
+        <input type="text" name="fin_date" placeholder="Дата">
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
+
+<div class="fin-list">
+    <table>
+        <thead><tr><td></td></tr></thead>
+        <div th:each="fin : ${all_fins}">
+            <div th:text="${fin.id}">id</div>
+            <div th:text="${fin.fin_title}">email</div>
+            <div th:text="${fin.fin_value}">role</div>
+            <div th:text="${fin.fin_date}">status</div>
+        </div>
+    </table>
+</div>
+</body>
+
+
+<!--</body>-->
 </html>

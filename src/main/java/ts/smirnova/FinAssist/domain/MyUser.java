@@ -4,28 +4,25 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+
 @Entity
 @Table(name = "users")
-public class User {
+public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
     private String email;
     private String password;
-    private String role;
+    private String roles;
     private boolean active;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
-
-    public User() {
+    public MyUser() {
     }
 
-    public User(String username, String email, String password) {
+    public MyUser(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -63,12 +60,12 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public boolean isActive() {
@@ -77,13 +74,5 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }
