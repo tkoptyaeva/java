@@ -21,34 +21,46 @@
 <body sec:authorize="isAuthenticated()">
 <!--Для авторизованных-->
 <header>
-    <h1>Твои финансы</h1>
+    <h1>Твои финансы <span th:text="${username}">fin_title</span></h1>
 
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
+        <input type="hidden" name="_csrf" value=${_csrf.token}>
     </form>
 </header>
+<h3 th:if="${message}" th:text="${message}">message</h3>
+
 
 <div class="new-fin-form">
-    <h1>Введите новые расходы</h1>
-    <form action="/" method="POST">
-        <input type="text" name="fin_title" placeholder="Расходы">
-        <input type="text" name="fin_value" placeholder="Сумма">
-        <input type="text" name="fin_date" placeholder="Дата">
+    <h3>Введите новые расходы</h3>
+    <form action="/addFin" method="POST">
+        <input type="text" name="fin_title" placeholder="Расходы" required>
+        <input type="text" name="fin_value" placeholder="Сумма" required>
+        <input type="text" name="fin_date" placeholder="Дата" required>
         <input type="submit" value="Сохранить">
+        <input type="hidden" name="_csrf" value=${_csrf.token}>
     </form>
 </div>
 
-<div class="fin-list">
-    <table>
-        <thead><tr><td></td></tr></thead>
-        <div th:each="fin : ${all_fins}">
-            <div th:text="${fin.id}">id</div>
-            <div th:text="${fin.fin_title}">email</div>
-            <div th:text="${fin.fin_value}">role</div>
-            <div th:text="${fin.fin_date}">status</div>
-        </div>
-    </table>
-</div>
+
+
+<table th:if="${all_fins}">
+    <thead>
+        <tr>
+            <th>Расходы/Доходы</th>
+            <th>Сумма</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="fin : ${all_fins}">
+            <td><span th:text="${fin.fin_title}">fin_title</span></td>
+            <td><span th:text="${fin.fin_value}">fin_value</span></td>
+            <td><span th:text="${fin.fin_date}">fin_date</span></td>
+        </tr>
+    </tbody>
+</table>
+
 </body>
 
 

@@ -25,3 +25,26 @@ input {
     font-size: 18px;
     padding: 5px;
 }
+.user-list {
+    width: 100%;
+    padding: 10px;
+}
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid;
+    padding: 5px;
+    text-align: center;
+}
+.new-fin-form {
+    margin-bottom: 10px;
+}
+.new-fin-form form {
+    display: flex;
+    flex-direction: row;
+}
+.new-fin-form form input {
+    margin: 0px 5px;
+    font-size: 14px;
+}

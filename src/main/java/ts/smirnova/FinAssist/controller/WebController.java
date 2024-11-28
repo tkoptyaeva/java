@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import ts.smirnova.FinAssist.domain.Finance;
 import ts.smirnova.FinAssist.domain.MyUser;
 import ts.smirnova.FinAssist.repos.FinRepo;
 import ts.smirnova.FinAssist.repos.UserRepo;
@@ -24,7 +23,8 @@ public class WebController {
     private FinRepo finRepo;
 
     @GetMapping("/reg")
-    public String reg() { // обработка запроса страницы авторизации
+    public String reg(Model model) { // обработка запроса страницы авторизации
+        model.addAttribute("showForm", "true");
         return "reg";
     }
 
@@ -41,22 +41,9 @@ public class WebController {
         user.setRoles("ROLE_USER"); // добавляем роль
         user.setPassword(passwordEncoder.encode(user.getPassword())); // шифруем пароль
         userRepo.save(user);
-        return "redirect:/login,";
-//        return "reg";
-    }
-
-    @GetMapping("/")
-    public String main(Model model) { // обработка запроса основной страницы
-//        Iterable<Finance> all_fins = finRepo.findAll();
-//        model.addAttribute("all_fins", all_fins);
-        return "index";
-    }
-
-    @PostMapping("/")
-    public String newFinance(Model model) { // обработка формы сохранения расходов
-//        Iterable<Finance> all_fins = finRepo.findAll();
-//        model.addAttribute("fins", all_fins);
-        return "index";
+        model.addAttribute("message", "Вы успешно зарегистрировались. Войдите под своим пользователем");
+        model.addAttribute("isNew", "true");
+        return "reg";
     }
 
     @GetMapping("/admin")

@@ -14,11 +14,12 @@
 <h1>Регистрация</h1>
 
 <h3 th:if="${message}" th:text="${message}">message</h3>
+<a th:if="${isNew}" href="/login" class="main-link">Авторизоваться</a>
 
-<form action="/reg" method="POST">
-    <input type="text" name="username" placeholder="Логин">
-    <input type="text" name="email" placeholder="Почта">
-    <input type="password" name="password" placeholder="Пароль">
+<form action="/reg" method="POST" th:if="${showForm}">
+    <input type="text" name="username" placeholder="Логин" required>
+    <input type="text" name="email" placeholder="Почта" required>
+    <input type="password" name="password" placeholder="Пароль" required>
     <input type="hidden" name="_csrf" value=${_csrf.token}>
     <input type="submit" value="Зарегистрироваться">
 </form>

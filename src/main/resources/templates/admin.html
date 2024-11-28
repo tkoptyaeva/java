@@ -12,15 +12,26 @@
 <body>
 <h1>Список пользователей</h1>
 
-<div class="user-list">
-  <div th:each="users : ${users}">
-    <div th:text="${users.id}">id</div>
-    <div th:text="${users.username}">username</div>
-    <div th:text="${users.email}">email</div>
-    <div th:text="${users.email}">role</div>
-    <div th:text="${users.email}">status</div>
-  </div>
-</div>
+<table class="user-list">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>username</th>
+      <th>email</th>
+      <th>role</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="users : ${users}">
+      <td><span th:text="${users.id}">id</span></td>
+      <td><span th:text="${users.username}">username</span></td>
+      <td><span th:text="${users.email}">email</span></td>
+      <td><span th:text="${users.roles}">roles</span></td>
+      <td><span th:text="${users.active}">active</span></td>
+    </tr>
+  </tbody>
+</table>
 
 </body>
 </html>
