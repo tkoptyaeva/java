@@ -2,19 +2,21 @@ package ts.smirnova.FinAssist.domain;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "finances")
 @Table(name = "finances")
 public class Finance {
+    // Класс описывает объект для хранения финансов пользователя
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer id; // идентификатор, автогенерируемый
 
-    private Integer user_id;
-    private String fin_title;
-    private double fin_value;
-    private String fin_date;
+    private Integer user_id; // id пользователя, который создал эту запись
+    private String fin_title; // название расходов/доходов
+    private double fin_value; // значение расходов/доходов
+    private String fin_date; // дата этого события
 
     public Finance() {
+        // пустой класс для совместимости
     }
 
     public Finance(String fin_title, double fin_value, String fin_date) {
@@ -23,6 +25,7 @@ public class Finance {
         this.fin_date = fin_date;
     }
 
+// стандартные методы для получания и записи значений в объекте
     public Integer getId() {
         return id;
     }

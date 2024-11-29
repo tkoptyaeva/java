@@ -48,19 +48,22 @@ public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() { //(PasswordEncoder encoder) {
 //        предоставляет сведения о пользователе в контексте безопасности
+//        этот метод ищет пользователя по учетным данным, которые введены на странице авторизации
         return new MyUserDetailsService();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-//        Кодируем введенный при авторизации пароль, чтобы его сравнить с тем что у пользователя
+//        шифрует введенный при авторизации пароль, чтобы его сравнить с тем что у пользователя,
+//        так как у него в бд он зашифрован
         return new BCryptPasswordEncoder();
     }
     @Bean
     public AuthenticationProvider authenticationProvider() {
+//        Этот метод задает как действовать придожению когда кто то авторизуется. он вызывается при авторизации
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(userDetailsService()); // чтобы найти пользователя использовать метод userDetailsService
+        provider.setPasswordEncoder(passwordEncoder()); // чтобы зашифровать пароль использовать метод passwordEncoder
         return provider;
     }
 }

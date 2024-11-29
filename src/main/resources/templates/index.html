@@ -21,20 +21,18 @@
 <body sec:authorize="isAuthenticated()">
 <!--Для авторизованных-->
 <header>
-    <h1>Твои финансы <span th:text="${username}">fin_title</span></h1>
+    <h1>Твои финансы <i th:text="${username}">username</i></h1>
 
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
         <input type="hidden" name="_csrf" value=${_csrf.token}>
     </form>
 </header>
-<h3 th:if="${message}" th:text="${message}">message</h3>
-
 
 <div class="new-fin-form">
-    <h3>Введите новые расходы</h3>
-    <form action="/addFin" method="POST">
-        <input type="text" name="fin_title" placeholder="Расходы" required>
+    <h3>Введите новые данные (доходы положительные, расходы отрицательные)</h3>
+    <form action="/" method="POST">
+        <input type="text" name="fin_title" placeholder="Название" required>
         <input type="text" name="fin_value" placeholder="Сумма" required>
         <input type="text" name="fin_date" placeholder="Дата" required>
         <input type="submit" value="Сохранить">
@@ -42,24 +40,44 @@
     </form>
 </div>
 
+<div class="table-elem">
+    <table th:if="${all_fins}">
+        <thead>
+            <tr>
+                <th>Итог</th>
+                <th>Расходы</th>
+                <th>Доходы</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><span th:text="${fin_total}">fin_total</span></th>
+                <th><span th:text="${fin_outcome}">fin_outcome</span></th>
+                <th><span th:text="${fin_income}">fin_income</span></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
-<table th:if="${all_fins}">
-    <thead>
-        <tr>
-            <th>Расходы/Доходы</th>
-            <th>Сумма</th>
-            <th>Дата</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="fin : ${all_fins}">
-            <td><span th:text="${fin.fin_title}">fin_title</span></td>
-            <td><span th:text="${fin.fin_value}">fin_value</span></td>
-            <td><span th:text="${fin.fin_date}">fin_date</span></td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-elem">
+    <table th:if="${all_fins}">
+        <thead>
+            <tr>
+                <th>Расходы/Доходы</th>
+                <th>Сумма</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="fin : ${all_fins}">
+                <td><span th:text="${fin.fin_title}">fin_title</span></td>
+                <td><span th:text="${fin.fin_value}">fin_value</span></td>
+                <td><span th:text="${fin.fin_date}">fin_date</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 

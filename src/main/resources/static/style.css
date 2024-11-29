@@ -19,17 +19,35 @@ form {
     display: flex;
     flex-direction: column;
 }
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+}
+header h1 {
+    margin-left: auto;
+}
+header form {
+    margin-left: auto;
+}
+header form input {
+    font-size: 14px;
+}
 
 input {
     margin: 5px 0px;
     font-size: 18px;
     padding: 5px;
 }
-.user-list {
+.table-elem {
     width: 100%;
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 table {
+    width: 800px;
     border-collapse: collapse;
 }
 table, th, td {

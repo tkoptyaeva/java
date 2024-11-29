@@ -13,11 +13,13 @@ import java.util.Optional;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+    // Класс нужен для работы авторизации пользователей.
     @Autowired
     private UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // метод для поиска пользователя в бд по логину при авторизации
         Optional<MyUser> user = userRepo.findByUsername(username);
         return user.map(MyUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " не найден"));

@@ -10,28 +10,38 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Список пользователей</h1>
+<header>
+  <h1>Список пользователей</h1>
 
-<table class="user-list">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>username</th>
-      <th>email</th>
-      <th>role</th>
-      <th>status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="users : ${users}">
-      <td><span th:text="${users.id}">id</span></td>
-      <td><span th:text="${users.username}">username</span></td>
-      <td><span th:text="${users.email}">email</span></td>
-      <td><span th:text="${users.roles}">roles</span></td>
-      <td><span th:text="${users.active}">active</span></td>
-    </tr>
-  </tbody>
-</table>
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+    <input type="hidden" name="_csrf" value=${_csrf.token}>
+  </form>
+</header>
+<a href="/" class="main-link">Перейти на главную</a>
+
+<div class="table-elem">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>username</th>
+        <th>email</th>
+        <th>role</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="users : ${users}">
+        <td><span th:text="${users.id}">id</span></td>
+        <td><span th:text="${users.username}">username</span></td>
+        <td><span th:text="${users.email}">email</span></td>
+        <td><span th:text="${users.roles}">roles</span></td>
+        <td><span th:text="${users.active}">active</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 </body>
 </html>

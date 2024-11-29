@@ -8,18 +8,20 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class MyUser {
+    // Класс описывает объект Пользователь
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer id; // ид пользователя
     @Column(unique = true)
-    private String username;
+    private String username; // его логи (аннотация показывает что это значение должно быть уникальным в таблице
     @Column(unique = true)
-    private String email;
-    private String password;
-    private String roles;
-    private boolean active;
+    private String email; // почта
+    private String password; // пароль
+    private String roles; // роли пользователя
+    private boolean active; // статус активности
 
     public MyUser() {
+        // пустой конструктор для совместимости
     }
 
     public MyUser(String username, String email, String password) {
